@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "storecp-f26c9": {
+      "hosting": {
+        "storeCP": [
+          "storecp-f26c9"
+        ]
+      }
+    }
+  }
+}
