@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  user$ : Observable<any> =  this.authService.afAuth.user;
 
-  ngOnInit(): void {
+  constructor(private authService : AuthService, private router : Router) { }
+
+  ngOnInit() {
+
+  }
+
+  async logoout() {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/login'])
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 
 }

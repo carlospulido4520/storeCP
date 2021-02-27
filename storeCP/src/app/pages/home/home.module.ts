@@ -7,11 +7,13 @@ import { ComponentsModule } from 'src/app/components/components.module';
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+    HomeComponent
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     ComponentsModule
-  ]
+  ],
 })
 export class HomeModule { }

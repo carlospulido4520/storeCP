@@ -1,0 +1,58 @@
+<section class="hero is-link">
+    <div class="hero-body">
+        <p class="title">
+            Lista de todos los productos
+        </p>
+    </div>
+</section>
+
+
+<div class="container  mt-5">
+    <div class="columns is-centered">
+        <div class="column is-9-tablet is-9-desktop is-9-widescreen">
+            <button class="button is-primary" [routerLink]="['../form']">Crear producto</button>
+            <div class="card mt-2">
+                <div class="card-content">
+                    <div class="content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Valor</th>
+                                    <th>Categoría</th>
+                                    <th>Operaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of products">
+                                    <td> {{ item.code}}</td>
+                                    <td> {{ item.name}}</td>
+                                    <td> {{ item.value}}</td>
+                                    <td> {{ item.category}}</td>
+                                    <td>
+                                        <button class="button is-small is-info mr-2" (click)="editProduct(item)">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-pen"></i>
+                                            </span>
+                                        </button>
+                                        <button class="button is-small is-danger" (click)="confirmDelete(item.id)">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ng-container *ngIf="products.length === 0">
+                            <div class="columns  is-link is-full notification is-centered">
+                                No hay registros
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,9 @@ import { RegisterModule } from './pages/register/register.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { ProductsModule } from './pages/products/products.module';
+import { CategoriesModule } from './pages/categories/categories.module';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { environment } from 'src/environments/environment';
     LoginModule,
     RegisterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ProductsModule,
+    CategoriesModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

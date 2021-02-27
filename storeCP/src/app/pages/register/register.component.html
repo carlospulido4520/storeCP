@@ -1,25 +1,12 @@
 <section class="hero is-primary is-fullheight">
     <div class="hero-body">
         <p class="title">
-            Formulario de registro
+            Registro
         </p>
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-5-tablet is-4-desktop is-6-widescreen">
                     <form [formGroup]="formLogin" class="box">
-                        <div class="field">
-                            <label for="" class="label">Nombre completo</label>
-                            <div class="control has-icons-left">
-                                <input class="input" placeholder="Carlos Pulido" required formControlName="name">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </div>
-                            <p *ngIf="formLogin.get('name').errors?.required && formLogin.get('name').touched"
-                                class="help is-danger">
-                                Este campo es obligatorio
-                            </p>
-                        </div>
                         <div class="field">
                             <label for="" class="label">Email</label>
                             <div class="control has-icons-left">
@@ -38,27 +25,18 @@
                             <label for="" class="label">Password</label>
                             <div class="control has-icons-left">
                                 <input type="password" placeholder="*******" class="input" required
-                                    formControlName="pasword">
+                                    formControlName="password" minlength="6" maxLength="10">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
                                 </span>
                             </div>
-                            <p *ngIf="formLogin.get('pasword').errors?.required && formLogin.get('pasword').touched"
-                                class="help is-danger">
-                                Este campo es obligatorio
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label for="" class="label">Dirección</label>
-                            <div class="control has-icons-left">
-                                <input class="input" required formControlName="location" placeholder="Cartagena">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-location-arrow"></i>
-                                </span>
-                            </div>
-                            <p *ngIf="formLogin.get('location').errors?.required && formLogin.get('location').touched"
-                                class="help is-danger">
-                                Este campo es obligatorio
+                            <p class="help is-danger">
+                                <ng-container *ngIf="formLogin.get('password').errors?.required && formLogin.get('password').touched">
+                                    Este campo es obligatorio
+                                </ng-container>
+                                <ng-container *ngIf="formLogin.get('password').errors?.minlength " >
+                                    Minímo 6 catacteres
+                                </ng-container>
                             </p>
                         </div>
                         <div class="field columns">

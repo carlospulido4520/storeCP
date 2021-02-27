@@ -1,4 +1,4 @@
-<nav class="navbar is-info" role="navigation" aria-label="main navigation">
+<nav class="navbar is-info" role="navigation" aria-label="main navigation" *ngIf="user$|async as user">
     <div class="navbar-brand">
         <a class="navbar-item">
             <img src="https://i.pinimg.com/originals/77/c3/66/77c366436d8bd35fe8b3ce5b8c66992e.png">
@@ -13,23 +13,26 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item" [routerLink]="['/']">
+            <a class="navbar-item" [routerLink]="['/home']">
                 Inicio
             </a>
 
-            <a class="navbar-item">
+            <a class="navbar-item" [routerLink]="['/home/products/listProducts']">
                 Productos
             </a>
 
-            <a class="navbar-item">
+            <a class="navbar-item" [routerLink]="['/home/categories/listCategories']">
                 Categorías
             </a>
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
+                {{user?.email}}
+            </div>
+            <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary" [routerLink]="['/login']">
+                    <a class="button is-primary" [routerLink]="['/login']" (click)="logoout()">
                         <strong>Cerrar sesión</strong>
                     </a>
                 </div>

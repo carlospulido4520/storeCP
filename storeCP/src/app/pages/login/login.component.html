@@ -1,8 +1,13 @@
 <section class="hero is-primary is-fullheight">
     <div class="hero-body">
+        <p class="title">
+            Inicio de
+            <br>
+            sesión
+        </p>
         <div class="container">
             <div class="columns is-centered">
-                <div class="column is-5-tablet is-4-desktop is-6-widescreen">
+                <div class="column is-9-tablet is-4-desktop is-6-widescreen">
                     <form [formGroup]="formLogin" class="box">
                         <div class="field">
                             <label for="" class="label">Email</label>
@@ -22,23 +27,25 @@
                             <label for="" class="label">Password</label>
                             <div class="control has-icons-left">
                                 <input type="password" placeholder="*******" class="input" required
-                                    formControlName="pasword">
+                                    formControlName="password">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
                                 </span>
                             </div>
-                            <p *ngIf="formLogin.get('pasword').errors?.required && formLogin.get('pasword').touched"
+                            <p *ngIf="formLogin.get('password').errors?.required && formLogin.get('password').touched"
                                 class="help is-danger">
                                 Este campo es obligatorio
                             </p>
                         </div>
                         <div class="field columns">
-                            <div class="column">
-                                <button class="button is-success" [disabled]="formLogin.invalid">
+                            <div class="column is-6">
+                                <button class="button is-success" [disabled]="formLogin.invalid || loading" (click)="login()">
                                     Iniciar sesión
+                                    <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"
+                                    *ngIf="loading"></span>
                                 </button>
                             </div>
-                            <div class="column has-text-right">
+                            <div class="column  is-6 has-text-right">
                                 <button class="button is-link" [routerLink]="['/register']">
                                     Registrarse
                                 </button>

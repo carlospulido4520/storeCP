@@ -1,0 +1,54 @@
+<section class="hero is-link">
+    <div class="hero-body">
+        <p class="title">
+            {{idCategory ? 'Editar categoría' : 'Crear categoría'}}
+        </p>
+    </div>
+</section>
+
+<div class="container  mt-5">
+    <div class="columns is-centered">
+        <div class="column is-9-tablet is-9-desktop is-9-widescreen">
+            <button class="button is-primary mr-3" [routerLink]="['../listCategories']">Volver</button>
+            <button class="button is-success" (click)="send(idCategory)" [disabled]="formCategory.invalid">
+                {{idCategory ? 'Editar' : 'Crear'}}
+            </button>
+            <div class="card mt-2">
+                <div class="card-content">
+                    <div class="content">
+                        <form [formGroup]="formCategory">
+                            <div class="columns">
+                                <div class="field column">
+                                    <label for="" class="label">Código</label>
+                                    <div class="control has-icons-left">
+                                        <input placeholder="CP0000" class="input" required formControlName="code" maxLength="10">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-code"></i>
+                                        </span>
+                                    </div>
+                                    <p *ngIf="formCategory.get('code').errors?.required && formCategory.get('code').touched"
+                                        class="help is-danger">
+                                        Este campo es obligatorio
+                                    </p>
+                                </div>
+                                <div class="field column">
+                                    <label for="" class="label">Nombre</label>
+                                    <div class="control has-icons-left">
+                                        <input placeholder="Borrador" class="input" required formControlName="name" maxLength="20">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-signature"></i>
+                                        </span>
+                                    </div>
+                                    <p *ngIf="formCategory.get('name').errors?.required && formCategory.get('name').touched"
+                                        class="help is-danger">
+                                        Este campo es obligatorio
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

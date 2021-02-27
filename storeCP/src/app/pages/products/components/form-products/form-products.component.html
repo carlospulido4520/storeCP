@@ -1,0 +1,90 @@
+<section class="hero is-link">
+    <div class="hero-body">
+        <p class="title">
+            {{ idProduct ? 'Editar producto' : 'Crear producto'}}
+        </p>
+    </div>
+</section>
+
+<div class="container  mt-5">
+    <div class="columns is-centered">
+        <div class="column is-9-tablet is-9-desktop is-9-widescreen">
+            <button class="button is-primary mr-3" [routerLink]="['../listProducts']">Volver</button>
+            <button class="button is-success" (click)="send(idProduct)" [disabled]="formProduct.invalid">
+                {{idProduct ? 'Editar' : 'Crear'}}
+            </button>
+            <div class="card mt-2">
+                <div class="card-content">
+                    <div class="content">
+                        <form [formGroup]="formProduct">
+                            <div class="columns">
+                                <div class="field column">
+                                    <label for="" class="label">Código</label>
+                                    <div class="control has-icons-left">
+                                        <input placeholder="CP0000" class="input" required formControlName="code">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-code"></i>
+                                        </span>
+                                    </div>
+                                    <p *ngIf="formProduct.get('code').errors?.required && formProduct.get('code').touched"
+                                        class="help is-danger">
+                                        Este campo es obligatorio
+                                    </p>
+                                </div>
+                                <div class="field column">
+                                    <label for="" class="label">Nombre</label>
+                                    <div class="control has-icons-left">
+                                        <input placeholder="Borrador" class="input" required formControlName="name">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-signature"></i>
+                                        </span>
+                                    </div>
+                                    <p *ngIf="formProduct.get('name').errors?.required && formProduct.get('name').touched"
+                                        class="help is-danger">
+                                        Este campo es obligatorio
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="field column">
+                                    <label for="" class="label">Valor</label>
+                                    <div class="control has-icons-left">
+                                        <input placeholder="50000" class="input" required formControlName="value">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                    </div>
+                                    <p *ngIf="formProduct.get('value').errors?.required && formProduct.get('value').touched"
+                                        class="help is-danger">
+                                        Este campo es obligatorio
+                                    </p>
+                                </div>
+
+                                <div class="field column">
+                                    <label for="" class="label">Categoría</label>
+                                    <div class="control has-icons-left">
+                                        <div class="select">
+                                            <select formControlName="category">
+                                                <option disabled>Seleccione una opción</option>
+                                                <option [value]="item.name" *ngFor="let item of categories">
+                                                    {{ item.code }} - {{ item.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-filter"></i>
+                                        </span>
+                                    </div>
+                                    <p *ngIf="formProduct.get('category').errors?.required && formProduct.get('category').touched"
+                                        class="help is-danger">
+                                        Este campo es obligatorio
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
