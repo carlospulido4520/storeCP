@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AdminGuard  } from './admin/admin.guard';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -9,26 +8,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
+    path: 'auth',
     loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'register',
-    loadChildren: () =>
-      import('./pages/register/register.module').then((m) => m.RegisterModule),
+    path: '',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
-    canActivate: [AdminGuard]
-  },
-  
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+
+  { path: '**', pathMatch: 'full', redirectTo: 'auth' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true, })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

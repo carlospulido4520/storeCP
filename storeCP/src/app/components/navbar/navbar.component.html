@@ -17,18 +17,18 @@
                 Inicio
             </a>
 
-            <a class="navbar-item" [routerLink]="['/home/products/listProducts']">
+            <a class="navbar-item" routerLink="/home/product/listProducts">
                 Productos
             </a>
 
-            <a class="navbar-item" [routerLink]="['/home/categories/listCategories']">
+            <a class="navbar-item" routerLink="/home/category/listCategories">
                 Categorías
             </a>
 
             <a class="navbar-item">
                 <div class="field is-grouped">
                     <p class="control">
-                        <a class="bd-tw-button button" [routerLink]="['/home/productsAdd/listProductsAdd']">
+                        <a class="bd-tw-button button" routerLink="/home/cart/listProductsAdd">
                           <span class="icon">
                             <i class="fas fa-shopping-cart"></i>
                           </span>
@@ -58,7 +58,7 @@
             </div>
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary" [routerLink]="['/login']" (click)="logout()">
+                    <a class="button is-primary" [routerLink]="['/auth']" (click)="logout()">
                         <strong>Cerrar sesión</strong>
                     </a>
                 </div>
