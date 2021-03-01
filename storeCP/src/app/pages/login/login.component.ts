@@ -38,11 +38,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe(
       () => {
         this.router.navigate(['home']);
-        this.formLogin.reset()
+        this.formLogin.reset();
+        this.loading = false;
       }, error => {
         console.log(error)
         const text = 'Email o contraseña incorrecta';
         this.toastService.toasError(text);
+        this.loading = false;
       }
     )
   }
