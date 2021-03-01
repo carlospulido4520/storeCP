@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { ProductsModule } from './pages/products/products.module';
 import { CategoriesModule } from './pages/categories/categories.module';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { ShoppingCartModule } from './pages/shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AngularFireAuthModule,
     ProductsModule,
     CategoriesModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ShoppingCartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

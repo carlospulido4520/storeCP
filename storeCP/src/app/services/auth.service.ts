@@ -1,53 +1,41 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { ToastService } from './toast.service';
+import { from, Subscription } from 'rxjs';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, private toastService: ToastService, private router: Router) { }
+  public user!: firebase.User;
+  subscription!: Subscription;
 
 
-  async login(email: string, password: string) {
-    try {
-      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(['/home']);
-      return result;
-    }
-    catch (error) {
-      const text = 'Email o contraseña incorrecta';
-      this.toastService.toasError(text);
-    }
+  constructor(public afAuth: AngularFireAuth) {
+    this.subscription = this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.user = user;
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } else {
+        localStorage.setItem('user', '');
+      }
+    });
   }
 
-  async register(email: string, password: string) {
-    try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
-      const succes = 'Usuario creado correctamente';
-      this.toastService.toasSuccess(succes);
-      return result;
-    }
-    catch (error) {
-      const text = 'Revise los datos';
-      this.toastService.toasError(text);
-    }
+
+  login(email: string, password: string) {
+    return from(this.afAuth.signInWithEmailAndPassword(email, password));
+  }
+
+  register(email: string, password: string) {
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password))
+
   }
 
   async logout() {
-    try {
-      await this.afAuth.signOut();
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
-
-  getCurrentUser() {
-    return this.afAuth.authState.pipe(first()).toPromise();
+    await this.afAuth.signOut();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }

@@ -1,31 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   user$ : Observable<any> =  this.authService.afAuth.user;
+  numberOfProducts : number = 0;
+  qantitySuscription : Subscription;
 
-  constructor(private authService : AuthService, private router : Router) { }
+  constructor(
+    private authService : AuthService, 
+    public router : Router, 
+    private productService : ProductService,
+    ) { }
 
   ngOnInit() {
-
+    this.qantitySuscription = this.productService.quantity$.subscribe(
+      (qantity)=> {
+        this.numberOfProducts = qantity;
+      }
+    )
   }
 
-  async logoout() {
-    try {
-      await this.authService.logout();
-      this.router.navigate(['/login'])
-    }
-    catch (error) {
-      console.log(error)
-    }
+  async logout() {
+    await this.authService.logout();
+    await this.router.navigate(['login']);
+    localStorage.removeItem('user');
+    await this.productService.productsInCar.remove();
+  }
+
+  ngOnDestroy(): void {
+    this.qantitySuscription.unsubscribe();
+    
   }
 
 }

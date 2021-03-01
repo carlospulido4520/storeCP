@@ -25,7 +25,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.productServide.gerCategories().snapshotChanges().subscribe(
+    this.productServide.gerProducts().snapshotChanges().subscribe(
       response => {
         this.products = response.map(element => {
           let dataFireBase = element.payload.toJSON();
@@ -49,6 +49,10 @@ export class ListProductsComponent implements OnInit {
     const id = product.id;
     this.productServide.selectedProduct = product;
     this.router.navigate(['../form'], { relativeTo: this.activatedRoute, queryParams: { id } });
+  }
+
+  addCar(product : Product){
+    this.productServide.addProductToCar(product);
   }
 
   deleteCategory(id: string) {

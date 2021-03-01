@@ -38,18 +38,20 @@
                             </p>
                         </div>
                         <div class="field columns">
-                            <div class="column is-6">
-                                <button class="button is-success" [disabled]="formLogin.invalid || loading" (click)="login()">
-                                    Iniciar sesión
-                                    <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"
-                                    *ngIf="loading"></span>
-                                </button>
-                            </div>
                             <div class="column  is-6 has-text-right">
                                 <button class="button is-link" [routerLink]="['/register']">
                                     Registrarse
                                 </button>
                             </div>
+                            <div class="column is-6">
+                                <button class="button is-success" [disabled]="formLogin.invalid || loading"
+                                    (click)="login()">
+                                    Iniciar sesión
+                                    <span class="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"
+                                        *ngIf="loading"></span>
+                                </button>
+                            </div>
+
                         </div>
                     </form>
                 </div>

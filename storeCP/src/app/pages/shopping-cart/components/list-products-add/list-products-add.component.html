@@ -1,7 +1,7 @@
 <section class="hero is-link">
     <div class="hero-body">
         <p class="title">
-            Lista de todos los productos
+            Lista de tus productos añadidos
         </p>
     </div>
 </section>
@@ -9,8 +9,7 @@
 
 <div class="container  mt-5">
     <div class="columns is-centered">
-        <div class="column is-9-tablet is-9-desktop is-9-widescreen">
-            <button class="button is-primary" [routerLink]="['../form']">Crear producto</button>
+        <div class="column is-6-tablet is-6-desktop is-7-widescreen">
             <div class="card mt-2">
                 <div class="card-content">
                     <div class="content">
@@ -20,7 +19,6 @@
                                     <th>Código</th>
                                     <th>Nombre</th>
                                     <th>Valor</th>
-                                    <th>Categoría</th>
                                     <th>Operaciones</th>
                                 </tr>
                             </thead>
@@ -29,18 +27,7 @@
                                     <td> {{ item.code}}</td>
                                     <td> {{ item.name}}</td>
                                     <td> {{ item.value | currency :'$':'symbol':'1.0-2'}}</td>
-                                    <td> {{ item.category}}</td>
                                     <td>
-                                        <button class="button is-small is-info mr-2" (click)="editProduct(item)">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-pen"></i>
-                                            </span>
-                                        </button>
-                                        <button class="button is-small is-success mr-2" (click)="addCar(item)">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        </button>
                                         <button class="button is-small is-danger" (click)="confirmDelete(item.id)">
                                             <span class="icon is-small">
                                                 <i class="fas fa-trash"></i>
@@ -52,9 +39,37 @@
                         </table>
                         <ng-container *ngIf="products.length === 0">
                             <div class="columns  is-link is-full notification is-centered">
-                                No hay registros
+                                No hay productos añadidos
                             </div>
                         </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-6-tablet is-6-desktop is-5-widescreen">
+            <div class="card mt-2">
+                <div class="card-content">
+                    <div class="content">
+                        <h5 class="text-uppercase mb-4">Total a pagar</h5>
+                        <hr class="m-0">
+                        <ul class="list-unstyled mb-0">
+                            <li class="">
+                                <strong class="text-uppercase small font-weight-bold">Subtotal:</strong>
+                                <span class="text-muted small"> {{total | currency :'$':'symbol':'1.0-2'}}</span>
+                            </li>
+                            <li class="">
+                                <strong class="text-uppercase small font-weight-bold">Total:</strong>
+                                <span>
+                                    {{total | currency :'$':'symbol':'1.0-2'}}
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="columns mt-4">
+                            <button class="column button is-link p-0" [disabled]="total === 0">
+                                Pagar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

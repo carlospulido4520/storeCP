@@ -24,6 +24,32 @@
             <a class="navbar-item" [routerLink]="['/home/categories/listCategories']">
                 Categorías
             </a>
+
+            <a class="navbar-item">
+                <div class="field is-grouped">
+                    <p class="control">
+                        <a class="bd-tw-button button" [routerLink]="['/home/productsAdd/listProductsAdd']">
+                          <span class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                          </span>
+                          <span class="columns ml-1">
+                              <div class="colum nameCar">
+                                  Carrito
+                              </div>
+                              <div class="colum">
+                                  <div class="notifications">
+                                      <p>
+                                          {{numberOfProducts}}
+                                      </p>
+
+                                  </div>
+                              </div>
+                          </span>
+                        </a>
+                      </p>
+                </div>
+                
+            </a>
         </div>
 
         <div class="navbar-end">
@@ -32,7 +58,7 @@
             </div>
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary" [routerLink]="['/login']" (click)="logoout()">
+                    <a class="button is-primary" [routerLink]="['/login']" (click)="logout()">
                         <strong>Cerrar sesión</strong>
                     </a>
                 </div>
@@ -40,3 +66,5 @@
         </div>
     </div>
 </nav>
+
+

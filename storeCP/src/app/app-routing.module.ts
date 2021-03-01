@@ -5,7 +5,7 @@ import { AdminGuard  } from './admin/admin.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
-    // canActivate: [AdminGuard]
+    canActivate: [AdminGuard]
   },
   
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
