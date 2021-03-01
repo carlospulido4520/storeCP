@@ -29,10 +29,11 @@ export class RegisterComponent implements OnInit {
   registerUser() {
     const { email, password } = this.formLogin.value;
     this.authService.register(email, password).subscribe(
-      () => {
+      (user) => {
         const succes = 'Usuario creado correctamente';
         this.toastService.toasSuccess(succes);
-        this.router.navigate(['home'])
+        this.router.navigate(['home']);
+        localStorage.setItem('user', JSON.stringify(user.user));
       }, error => {
         const text = 'Revise los datos';
         this.toastService.toasError(text);
