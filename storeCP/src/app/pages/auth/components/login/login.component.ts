@@ -36,12 +36,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     const { email, password } = this.formLogin.value;
     this.authService.login(email, password).subscribe(
-      () => {
+      (user) => {
+        localStorage.setItem('user', JSON.stringify(user.user));
         this.router.navigate(['home']);
         this.formLogin.reset();
         this.loading = false;
       }, error => {
-        console.log(error)
+        console.log(error);
         const text = 'Email o contraseña incorrecta';
         this.toastService.toasError(text);
         this.loading = false;
